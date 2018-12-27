@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-ai-face" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordova-plugin-ai-face</name>
+    <js-module name="cordova-plugin-ai-face" src="www/cordova-plugin-ai-face.js">
+        <clobbers target="window.BaiduAi" />
+    </js-module>
+  
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="callFacePlugin" >
+                <param name="android-package" value="org.apache.cordova.aiface.FaceLivenessExpPlugin"/>
+                <param name="onload" value="true" />
+              
+            </feature>
+        </config-file>
+        <framework src="src/android/faceplatform-release.gradle" custom="true" type="gradleReference"/>
+		<framework src="com.android.volley:volley:1.0.0@aar" />
+        <lib-file src="src/android/app-debug.aar" />
+        <lib-file src="src/android/faceplatform-ui-release.aar" />
+        <lib-file src="src/android/faceplatform-release.aar" />
+        <source-file src="src/android/Config.java" target-dir="src/org/apache/cordova/aiface" />
+        <source-file src="src/android/FaceDetectExpActivity.java" target-dir="src/org/apache/cordova/aiface" />
+        <source-file src="src/android/FaceLivenessExpPlugin.java" target-dir="src/org/apache/cordova/aiface" />
+        <source-file src="src/android/FaceLivenessExpActivity.java" target-dir="src/org/apache/cordova/aiface" />
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.CAMERA"/>
+            <uses-permission android:name="android.hardware.camera.autofocus"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+            android:name="org.apache.cordova.aiface.FaceLivenessExpActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_NoTitle" />
+            <activity
+            android:name="org.apache.cordova.aiface.FaceDetectExpActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_NoTitle" />
+        </config-file>
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="callFacePlugin">
+                <param name="ios-package" value="CDVFaceSDK" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVFaceSDK.h" />
+        <source-file src="src/ios/CDVFaceSDK.m" />
+
+        <header-file src="src/ios/Core/VideoCaptureDevice.h" />
+        <source-file src="src/ios/Core/VideoCaptureDevice.m" />
+
+        <header-file src="src/ios/Model/LivingConfigModel.h" />
+        <source-file src="src/ios/Model/LivingConfigModel.m" />
+
+        <header-file src="src/ios/Utils/ImageUtils.h" />
+        <source-file src="src/ios/Utils/ImageUtils.m" />
+
+        <header-file src="src/ios/ViewController/CircleView.h" />
+        <source-file src="src/ios/ViewController/CircleView.m" />
+
+        <header-file src="src/ios/ViewController/DetectionViewController.h" />
+        <source-file src="src/ios/ViewController/DetectionViewController.m" />
+
+        <header-file src="src/ios/ViewController/FaceBaseViewController.h" />
+        <source-file src="src/ios/ViewController/FaceBaseViewController.m" />
+
+        <header-file src="src/ios/ViewController/LivenessViewController.h" />
+        <source-file src="src/ios/ViewController/LivenessViewController.m" />
+
+        <header-file src="src/ios/ViewController/LivingConfigViewController.h" />
+        <source-file src="src/ios/ViewController/LivingConfigViewController.m" />
+
+        <header-file src="src/ios/ViewController/RemindView.h" />
+        <source-file src="src/ios/ViewController/RemindView.m" />
+
+        <header-file src="src/ios/FaceParameterConfig.h" />
+
+        <resource-file src="src/ios/com.baidu.idl.face.faceSDK.bundle" />
+        <resource-file src="src/ios/com.baidu.idl.face.model.bundle" />
+        <resource-file src="src/ios/idl-license.face-ios" />
+
+        <framework src="src/ios/IDLFaceSDK.framework" custom="true" />
+        <framework src="libc++.tbd" />
+
+         <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+             <string>使用相机</string>
+         </config-file>
+
+         <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
+             <string>使用相册</string>
+         </config-file>
+
+    </platform>
+</plugin>

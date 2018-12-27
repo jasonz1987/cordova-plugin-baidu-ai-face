@@ -1,0 +1,14 @@
+{
+  "name": "cordova-plugin-ai-face",
+  "version": "1.0.0",
+  "description": "baidu ai cordova-plugin-ai-face cordova plugin",
+  "cordova": {
+    "id": "cordova-plugin-ai-face",
+    "platforms": []
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "vince huang",
+  "license": "Apache-2.0"
+}
